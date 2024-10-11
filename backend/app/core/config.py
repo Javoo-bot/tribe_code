@@ -36,39 +36,39 @@ class Settings(BaseSettings):
 
     @computed_field  # type: ignore[misc]
     @property
-    def server_host(self) -> str:
-        # Use HTTPS for anything other than local development
-        if self.ENVIRONMENT == "local":
+    def server_host(self) -> str:  #define la URL base del servidor según el entorno 
+        # Si no lo hago en local uso HTTPS 
+        if self.ENVIRONMENT == "local":  #si lo hago en local entonces el uso el https
             return f"http://{self.DOMAIN}"
-        return f"https://{self.DOMAIN}"
+        return f"https://{self.DOMAIN}" 
 
     BACKEND_CORS_ORIGINS: Annotated[
-        list[AnyUrl] | str, BeforeValidator(parse_cors)
-    ] = []
-
-    PROJECT_NAME: str
-    SENTRY_DSN: HttpUrl | None = None
-    POSTGRES_SERVER: str
-    POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str = ""
+        list[AnyUrl] | str, BeforeValidator(parse_cors) #Valida que los orígenes de CORS sean URLs válidas y evita que haya fugas de seguridad
+    ] = [] #de momento estan vacias
+    #creo una conexion inicial
+    PROJECT_NAME: str #le pongo un nombre
+    SENTRY_DSN: HttpUrl | None = None  #mete sentry para los errores
+    POSTGRES_SERVER: str  #dirección del servidor de PostgreSQL
+    POSTGRES_PORT: int = 5432 #le pongo en este puerto 
+    POSTGRES_USER: str #le pongo usuario
+    POSTGRES_PASSWORD: str #contraseña 
+    POSTGRES_DB: str = "" #el nombre se lo pongo yo de momento vacio
 
     @computed_field  # type: ignore[misc]
     @property
-    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
-        return MultiHostUrl.build(
-            scheme="postgresql+psycopg",
-            username=self.POSTGRES_USER,
-            password=self.POSTGRES_PASSWORD,
-            host=self.POSTGRES_SERVER,
-            port=self.POSTGRES_PORT,
-            path=self.POSTGRES_DB,
+    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn: #uso esto para identificar la base de datos
+        return MultiHostUrl.build(   #como le meto muchos datos tengo que usar multihost 
+            scheme="postgresql+psycopg",  #uso postgres y un adaptador para usar postgreSQL en python
+            username=self.POSTGRES_USER, 
+            password=self.POSTGRES_PASSWORD,  
+            host=self.POSTGRES_SERVER, 
+            port=self.POSTGRES_PORT,  
+            path=self.POSTGRES_DB,    
         )
 
     @computed_field  # type: ignore[misc]
     @property
-    def PG_DATABASE_URI(self) -> str:
+    def PG_DATABASE_URI(self) -> str:  #construye una cadena de conexión y verifica si los datos se han mandado bien 
         return f"postgres://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     SMTP_TLS: bool = True
@@ -103,7 +103,7 @@ class Settings(BaseSettings):
 
     PROTECTED_NAMES: list[str] = ["user", "ignore", "error"]
 
-    def _check_default_secret(self, var_name: str, value: str | None) -> None:
+    def _check_default_secret(self, var_name: str, value: str | None) -> None: #verifica que las claves secretas no tengan valores por defecto inseguros
         if value == "changethis":
             message = (
                 f'The value of {var_name} is "changethis", '

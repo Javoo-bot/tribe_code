@@ -28,3 +28,9 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
 - Datos Iniciales (initial_data)
 - Tareas Menores de Datos (tasks)
 
+- **Config**
+   - Creación de un servidor local para desarrollo.
+   - Configuración de la conexión del backend a PostgreSQL.
+   - Interacción con PostgreSQL usando un ORM        (SQLAlchemy)    en Python.
+   - Almacenamiento seguro de claves y credenciales mediante variables de entorno.
+
