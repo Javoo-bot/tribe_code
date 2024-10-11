@@ -13,17 +13,17 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
   - Dada la complegidad y longuitud de las plantillas del kit digital entonces creo las plantillas mockeadas
   - Entender esquema de subidas en mi aplicacion de postgreSQL
     - Config base de postgreSQL (escribiré en md de postgre)
-        -Analizar como se ha configurado la app dentro del proyecto
+        -Analizar como se ha configurado la app dentro del proyecto: config/core/alembic
     - Config de mi app
-
-- **Extracción del Esquema de las Plantillas**
-  - Utilizar una biblioteca adecuada para extraer y almacenar la estructura de las plantillas.
 
 ### 2. Crear las Plantillas
 
 - **Definición de la Estructura de la Plantilla**
   - Establecer campos y secciones como títulos, descripciones, instrucciones y detalles del cliente.
-  
+
+- **Extracción del Esquema de las Plantillas**
+  - Utilizar una biblioteca adecuada para extraer y almacenar la estructura de las plantillas.
+
 - **Uso de Librerías de Plantillas**
   - Emplear herramientas como Jinja2 o docxtpl para diseñar plantillas dinámicas.
   

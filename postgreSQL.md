@@ -1,6 +1,7 @@
 # Dudas PostgreSQL
 
 Para conectarnos ponemos los valores las credenciales de postgreSQL en .env 
+
 Luego el docker compose coje los datos de .env
 
 La app usa SQLAlchemy como ORM para conectarse a PostgreSQL.Es decir no hay consultas SQL directas
@@ -20,8 +21,7 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
 ## Estructura general del proyecto
 
 - Configuración de la Conexión a la Base de Datos (config)
-- Información de la Conexión a la Base de Datos (user)
-- Manejo de la Base de Datos (core/db.py)
+- Manejo de la Base de Datos (core/db.py) 
 - Estructura de Datos y Tablas (models)
 - Migración de Datos (alembic)
 - Operaciones CRUD (crud.py)
@@ -31,6 +31,8 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
 - **Config**
    - Creación de un servidor local para desarrollo.
    - Configuración de la conexión del backend a PostgreSQL.
-   - Interacción con PostgreSQL usando un ORM        (SQLAlchemy)    en Python.
+   - Interacción con PostgreSQL usando un ORM (SQLAlchemy) en Python.
    - Almacenamiento seguro de claves y credenciales mediante variables de entorno.
 
+- **Core**
+   - ¿Que aprenderé aqui: crear y mantener conexion con PostgreSQL, como gestionar las sesiones y optimizar el rendimiento
