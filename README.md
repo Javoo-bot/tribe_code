@@ -10,11 +10,12 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
 
 - **Selección de Plantillas**
   - Identificar y seleccionar las plantillas necesarias para el proyecto.
-  - No veo una plantilla facil de usar en kit digital entonces creo las plantillas mockeadas
+  - Dada la complegidad y longuitud de las plantillas del kit digital entonces creo las plantillas mockeadas
   - Entender esquema de subidas en mi aplicacion de postgreSQL
-    - Config base de postgreSQL
+    - Config base de postgreSQL (escribiré en md de postgre)
+        -Analizar como se ha configurado la app dentro del proyecto
     - Config de mi app
-    
+
 - **Extracción del Esquema de las Plantillas**
   - Utilizar una biblioteca adecuada para extraer y almacenar la estructura de las plantillas.
 
