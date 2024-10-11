@@ -117,9 +117,10 @@ Las contribuciones son bienvenidas. Si deseas participar en este proyecto, por f
 
 Para cualquier consulta o sugerencia, puedes contactarme a través de:
 
-- **Correo Electrónico**: [tu_correo@example.com](mailto:tu_correo@example.com)
-- **LinkedIn**: [Tu Perfil de LinkedIn](https://www.linkedin.com/in/tu-perfil)
+- **Correo Electrónico**: [tu_correo@example.com][def]
 
 ---
 
 ¡Gracias por tu interés en este proyecto!
+
+[def]: mailto:uo250680@uniovi.es
