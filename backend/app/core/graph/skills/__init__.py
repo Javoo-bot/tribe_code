@@ -3,11 +3,11 @@ from langchain.tools import BaseTool
 from langchain_community.tools import DuckDuckGoSearchRun, WikipediaQueryRun
 from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
 from langchain_community.utilities import (WikipediaAPIWrapper)
-from app.core.graph.skills.mercurio import mercurio
-from app.core.graph.skills.hermes import hermes
-from app.core.graph.skills.hades import hades
-from app.core.graph.skills.erebos import erebos
-from app.core.graph.skills.pluton import pluton
+#from app.core.graph.skills.mercurio import mercurio
+#from app.core.graph.skills.hermes import hermes
+#from app.core.graph.skills.hades import hades
+#from app.core.graph.skills.erebos import erebos
+#from app.core.graph.skills.pluton import pluton
 
 # from .calculator import multiply
 
@@ -30,26 +30,26 @@ managed_skills: dict[str, SkillInfo] = {
         description="Get information from Yahoo Finance News",
         tool=YahooFinanceNewsTool(),
     ),
-    "Mercurio": SkillInfo(
-        description="Process a CSV file from S3, make a reports in PDF, and upload it to the app.",
-        tool=mercurio,
-    ),
-    "Hermes": SkillInfo(
-        description="Returns a dictionary containing the file path and its metadata",
-        tool=hermes,
-    ),
-    "Hades": SkillInfo(
-        description="Searches for money-related files in S3",
-        tool=hades,
-    ),
-    "Erebos": SkillInfo(  
-        description="Checks if an email address has been involved in any known data breaches.",
-        tool=erebos,
-    ),
-    "Pluton": SkillInfo(
-        description="Validates partial credit card numbers",
-        tool=pluton,
-    ),
+    #"Mercurio": SkillInfo(
+    #    description="Process a CSV file from S3, make a reports in PDF, and upload it to the app.",
+    #    tool=mercurio,
+    #),
+    #"Hermes": SkillInfo(
+    #    description="Returns a dictionary containing the file path and its metadata",
+    #    tool=hermes,
+    #),
+    #"Hades": SkillInfo(
+    #    description="Searches for money-related files in S3",
+    #   tool=hades,
+    #),
+    #"Erebos": SkillInfo(  
+    #    description="Checks if an email address has been involved in any known data breaches.",
+    #    tool=erebos,
+    #),
+    #"Pluton": SkillInfo(
+    #   description="Validates partial credit card numbers",
+    #    tool=pluton,
+    #),
 }
 
 # To add more custom tools, follow these steps:
