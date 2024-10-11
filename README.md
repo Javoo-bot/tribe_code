@@ -1,286 +1,125 @@
-<div align="center">
-  <img alt="tribe" height="200px" src="./img/tribe-logo.png">
-  <h1>Tribe AI</h1>
-  <p>✨ <b>Low code tool to rapidly build and coordinate multi-agent teams</b> ✨</p>
-  <a href="https://github.com/streetlamb/tribe/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/streetlamb/tribe/workflows/Test/badge.svg" alt="Test"></a>
-  <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/streetlamb/tribe" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/streetlamb/tribe.svg" alt="Coverage"></a>
-</div>
+# Proyecto de Gestión de Plantillas y Análisis de Documentos
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [What is Tribe?](#what-is-tribe)
-- [What are some use cases?](#what-are-some-use-cases)
-- [Highlights](#highlights)
-- [How to get started](#how-to-get-started)
-  - [Generate Secret Keys](#generate-secret-keys)
-  - [Deploy Tribe locally with Docker (simplest way)](#deploy-tribe-locally-with-docker-simplest-way)
-  - [Deploy Tribe on a remote server](#deploy-tribe-on-a-remote-server)
-- [Guides and concepts](#guides-and-concepts)
-  - [Sequential vs Hierarchical workflows](#sequential-vs-hierarchical-workflows)
-    - [Sequential workflows](#sequential-workflows)
-    - [Hierarchical workflows](#hierarchical-workflows)
-  - [Skills](#skills)
-    - [Create a Skill Using Skill Definitions](#create-a-skill-using-skill-definitions)
-    - [Writing a Custom Skill using LangChain](#writing-a-custom-skill-using-langchain)
-  - [Retrieval Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
-    - [Customising embedding models](#customising-embedding-models)
-  - [Guides](#guides)
-    - [Creating Your First Hierarchical Team](#creating-your-first-hierarchical-team)
-    - [Equipping Your Team Member with Skills](#equipping-your-team-member-with-skills)
-    - [Creating Your First Sequential Team](#creating-your-first-sequential-team)
-    - [Requiring Human Approval Before Skill Execution in Sequential Workflows](#requiring-human-approval-before-skill-execution-in-sequential-workflows)
-- [Contribution](#contribution)
-- [Release Notes](#release-notes)
-- [License](#license)
+## 📄 Descripción del Proyecto
+
+Este proyecto tiene como objetivo desarrollar un sistema eficiente para gestionar plantillas y analizar documentos que contienen tanto texto como imágenes. El flujo de trabajo está diseñado para extraer, almacenar y utilizar información relevante de los documentos para generar documentos personalizados según las necesidades del cliente.
+
+## 🚀 Flujo de Trabajo
+
+### 1. Almacenar Información de las Plantillas
+
+- **Selección de Plantillas**
+  - Identificar y seleccionar las plantillas necesarias para el proyecto.
   
+- **Extracción del Esquema de las Plantillas**
+  - Utilizar una biblioteca adecuada para extraer y almacenar la estructura de las plantillas.
+
+### 2. Crear las Plantillas
+
+- **Definición de la Estructura de la Plantilla**
+  - Establecer campos y secciones como títulos, descripciones, instrucciones y detalles del cliente.
+  
+- **Uso de Librerías de Plantillas**
+  - Emplear herramientas como Jinja2 o docxtpl para diseñar plantillas dinámicas.
+  
+- **Almacenamiento Temporal**
+  - Guardar plantillas de manera temporal en archivos locales durante el desarrollo y pruebas.
 
-> [!WARNING]
-> This project is currently under heavy development. Please be aware that significant changes may occur.
+### 3. Cargar las Plantillas en PostgreSQL
 
-## What is Tribe?
-Have you heard the saying, 'Two minds are better than one'? That's true for agents too. Tribe leverages on the langgraph framework to let you customize and coordinate teams of agents easily. By splitting up tough tasks among agents that are good at different things, each one can focus on what it does best. This makes solving problems faster and better.
+- **Configuración de la Conexión con PostgreSQL**
+  - Establecer una conexión entre la aplicación y PostgreSQL utilizando herramientas como Adminer.
+  
+- **Creación de una Nueva Tabla en PostgreSQL**
+  - Diseñar y crear una tabla específica para almacenar las plantillas.
+  
+- **Verificación de la Estructura de la Tabla**
+  - Asegurarse de que la tabla cumple con los requisitos para almacenar las plantillas de manera eficiente.
+  
+- **Integración con la Aplicación**
+  - Configurar la aplicación para acceder y gestionar las plantillas almacenadas en PostgreSQL.
 
+### 4. Subir Documentos con Información del Cliente a Qdrant
 
-## What are some use cases?
-By teaming up, agents can take on more complex tasks. Here are a few examples of what they can do together:
-- **⚽️ Footbal analysis**: Imagine a team of agents where one scours the web for the latest Premier League news, and another analyzes the data to write insightful reports on each team's performance in the new season.
-- **🏝️ Trip Planning**:  For planning your next vacation, one agent could recommend the best local eateries, while another finds the top-rated hotels for you. This team makes sure every part of your trip is covered.
-- **👩‍💻 Customer Service**:  A customer service team where one agent handles IT issues, another manages complaints, and a third takes care of product inquiries. Each agent specializes in a different area, making the service faster and more efficient.
+- **Preparación de los Documentos**
+  - Asegurar que los documentos están en el formato adecuado y contienen toda la información relevante del cliente.
+  
+- **Carga en Qdrant**
+  - Subir los documentos a Qdrant, asignando metadatos para facilitar búsquedas eficientes.
 
-and many many more!
+### 5. Mejorar la Función del Retrieval
 
-## Highlights
-- **Persistent conversations**: Save and maintain chat histories, allowing you to continue conversations.
-- **Observability**: Monitor and track your agents’ performance and outputs in real-time using LangSmith to ensure they operate efficiently.
-- **Tool Calling**: Enable your agents to utilize external tools and APIs.
--  **Retrieval Augmented Generation**: Enable your agents to reason with your internal knowledge base.
-- **Human-In-The-Loop**: Enable human approval before tool calling.
-- **Easy Deployment**: Deploy Tribe effortlessly using Docker.
-- **Multi-Tenancy**: Manage and support multiple users and teams.
+- **Búsqueda en Documentos Específicos**
+  - Filtrar los fragmentos de información para que las búsquedas se realicen dentro de un documento concreto.
+  
+- **Recuperación Precisa de Información**
+  - Configurar el sistema para recuperar únicamente los fragmentos relevantes a una consulta específica.
+  
+- **Implementación de Retrievers Específicos**
+  - Crear mecanismos que permitan tener diferentes retrievers para distintos documentos.
+  
+- **Integración con NLP**
+  - Utilizar técnicas de procesamiento de lenguaje natural para analizar consultas y extraer información requerida.
 
-## How to get started
+### 6. Rellenar Plantilla
 
-Before deploying it, make sure you change at least the values for:
+- **Extracción de Datos del Cliente**
+  - Obtener información necesaria del cliente, como nombre, fecha y detalles adicionales.
+  
+- **Relleno Automático de Plantillas**
+  - Insertar automáticamente los datos del cliente en los campos correspondientes de las plantillas almacenadas.
+  
+- **Generación de Documentos Finales**
+  - Crear documentos personalizados combinando plantillas con información específica del cliente.
 
-- `SECRET_KEY`
-- `FIRST_SUPERUSER_PASSWORD`
-- `POSTGRES_PASSWORD`
+## 🛠️ Guía de Implementación
 
-You can (and should) pass these as environment variables from secrets.
+### Crear las Plantillas
 
-### Generate Secret Keys
+1. **Definir la Estructura de la Plantilla**
+   - Establece los campos y secciones necesarias para cada plantilla.
 
-Some environment variables in the `.env` file have a default value of `changethis`.
+2. **Utilizar Librerías de Plantillas**
+   - Emplea herramientas como Jinja2 o docxtpl para diseñar plantillas dinámicas.
 
-You have to change them with a secret key, to generate secret keys you can run the following command:
+3. **Almacenar las Plantillas**
+   - Guarda las plantillas temporalmente en archivos locales durante el desarrollo.
+   - Posteriormente, almacena las plantillas en PostgreSQL para una gestión centralizada.
 
-```bash
-python -c "import secrets; print(secrets.token_urlsafe(32))"
-```
+### Mejorar la Función del Retrieval
 
-Copy the content and use that as password / secret key. And run that again to generate another secure key.
+1. **Filtrar por Documento**
+   - Añade metadatos a cada chunk para identificar a qué documento pertenecen.
+   - Filtra los chunks por documento antes de realizar búsquedas de similaridad.
 
+2. **Crear Retrievers Específicos**
+   - Configura retrievers separados para cada documento, asegurando que las búsquedas sean contextuales.
 
-### Deploy Tribe locally with Docker (simplest way)
+3. **Implementar NLP para Consultas Avanzadas**
+   - Utiliza técnicas de procesamiento de lenguaje natural para analizar y entender las consultas.
+   - Extrae los campos relevantes de las consultas para realizar búsquedas precisas.
 
-[Get up and started within minutes on your local machine.](./local-deployment.md)
+4. **Integración con Qdrant**
+   - Asegura que cada chunk en Qdrant tenga metadatos que permitan filtrados precisos.
+   - Optimiza las búsquedas para recuperar únicamente la información necesaria.
 
-### Deploy Tribe on a remote server
+## 🤝 Contribuciones
 
-[Deploy Tribe on your remote server.](./deployment.md)
+Las contribuciones son bienvenidas. Si deseas participar en este proyecto, por favor, sigue estos pasos:
 
-## Guides and concepts
+1. **Fork** el repositorio.
+2. **Crea una rama** (`git checkout -b feature/nueva-característica`).
+3. **Realiza tus cambios** y **commitea** (`git commit -am 'Añadir nueva característica'`).
+4. **Push** a la rama (`git push origin feature/nueva-característica`).
+5. **Abre un Pull Request**.
 
-### Sequential vs Hierarchical workflows
+## 📬 Contacto
 
-#### Sequential workflows
+Para cualquier consulta o sugerencia, puedes contactarme a través de:
 
-In a sequential workflow, your agents are arranged in an orderly sequence and execute tasks one after another. Each task can be dependent on the previous task. This is useful if you want to tasks to be completed one after another in a deterministic sequence. 
+- **Correo Electrónico**: [tu_correo@example.com](mailto:tu_correo@example.com)
+- **LinkedIn**: [Tu Perfil de LinkedIn](https://www.linkedin.com/in/tu-perfil)
 
-Use this if:
-- Your project has clear, step-by-step tasks.
-- The outcome of one task influences the next.
-- You prefer a straightforward and predictable execution order.
-- You need to ensure tasks are performed in a specific order.
+---
 
-#### Hierarchical workflows
-
-In a hierarchical workflow, your agents are organised into a team-like structure comprising of 'team leader', 'team members' and even other 'sub-team leaders'. The team leader breaks down the task into smaller tasks and delegate them to its team members. After the team members complete these tasks, their responses will be passed to the team leader who then chooses to return the response to the user or delegate more tasks.
-
-Use this if:
-- Your tasks are complex and multifaceted.
-- You need specialized agents to handle different subtasks.
-- Task delegation and re-evaluation are crucial for your workflow.
-- You want flexibility in task management and adaptability to changes.
-
-### Skills
-
-Skills are abilities that you can equip your agents with to interact with the world. For example, you can provide your agent with the skill to check the current weather condition or search the web for the latest news. By default, Tribe provides three skills:
-
-- **duckduckgo-search**: Performs web searches.
-- **wikipedia**: Searches Wikipedia for information.
-- **yahoo-finance**: Retrieves information from Yahoo Finance News.
-
-You will likely want to create custom skills, which can be done in two ways: by using function definitions for simple HTTP requests or by writing custom skills in the codebase.
-
-#### Create a Skill Using Skill Definitions
-
-If your skill involves performing an HTTP request to fetch or update data, using skill definitions is the simplest approach. In Tribe, start by navigating to the 'Skills' tab and clicking the 'Add Skill' button. You will then be prompted to provide the skill definition, which instructs your agent on how to execute the specific skill. This definition should be structured as follows:
-
-```json
-{
-  "url": "https://example.com",
-  "method": "GET",
-  "headers": {},
-  "type": "function",
-  "function": {
-    "name": "Your skill name",
-    "description": "Your skill description",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "param1": {
-          "type": "integer",
-          "description": "Description of the first parameter"
-        },
-        "param2": {
-          "type": "string",
-          "enum": ["option1"],
-          "description": "Description of the second parameter"
-        }
-      },
-      "required": ["param1", "param2"]
-    }
-  }
-}
-```
-
-| Key                      | Description                                                                                                                                                                |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`                    | The endpoint URL for the API call.                                                                                                                                         |
-| `method`                 | The HTTP method used for the request. It can be `GET`, `POST`, `PUT`, `PATCH`, or `DELETE`.                                                                                |
-| `headers`                | Any HTTP headers to include in the request.                                                                                                                                |
-| `function`               | Contains details about the skill:                                                                                                                                          |
-| `function > name`        | The name of the skill. Follow these rules: only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-) are allowed; must be between 1 and 64 characters long. |
-| `function > description` | Describes the skill to inform the agent about its usage.                                                                                                                   |
-| `function > parameters`  | Details about the parameters the API accepts.                                                                                                                              |
-| `properties > param`     | The name of the query or body parameter. For `GET` methods, this will be a query parameter. For `POST`, `PUT`, `PATCH`, and `DELETE`, it will be in the request body.      |
-| `param > type`           | Specifies the type of the parameter, which can be `string`, `number`, `integer`, or `boolean`.                                                                             |
-| `param > description`    | Provides context about the parameter's purpose.                                                                                                                            |
-| `param > enum`           | Optionally, include an array to restrict the agent to select from predefined values.                                                                                       |
-| `parameters > required`  | Lists the parameters that are required, ensuring they are always included in the API request.                                                                              |
-
-#### Writing a Custom Skill using LangChain
-
-For more intricate tasks that extend beyond simple HTTP requests, LangChain allows you to develop more advanced tools. You can integrate these tools into Tribe by adding them to the [`managed_skills` dictionary](https://github.com/streetlamb/tribe/blob/master/backend/app/core/graph/skills/__init__.py). For a practical example, refer to the [demo calculator tool](https://github.com/streetlamb/tribe/blob/master/backend/app/core/graph/skills/calculator.py). To learn how to create a LangChain tool, please consult their [documentation](https://python.langchain.com/v0.2/docs/how_to/custom_tools/).
-
-After creating a new tool, restart the application to ensure the tool is properly loaded into the database. Likewise, if you need to remove a tool, simply delete it from the `managed_skills` dictionary and restart the application to ensure it is removed from the database. Do note that tools created this way are available to all users in your application.
-
-### Retrieval Augmented Generation (RAG)
-
-RAG is a technique for augmenting your agents' knowledge with additional data. Agents can reason about a wide range of topics, but their knowledge is limited to public data up to the point in time they were trained on. If you want your agents to reason about private data, Tribe allows you to upload your data and select which data to include in your agent’s knowledge base. This enables your agents to reason with the selected data and allows you to create different agents with specialized knowledge.
-
-#### Customising embedding models
-
-By default, Tribe uses `BAAI/bge-small-en-v1.5`, which is a light and fast English embedding model that is better than `OpenAI Ada-002`. If your documents are multilingual or require image embedding, you may want to use another embedding model. You can easily do this by changing `DENSE_EMBEDDING_MODEL` in your `.env` file:
-
-```bash
-# See the list of supported models: https://qdrant.github.io/fastembed/examples/Supported_Models/
-DENSE_EMBEDDING_MODEL=BAAI/bge-small-en-v1.5 # Change this
-```
-
-> [!WARNING]
-> If your existing and new embedding models have different vector dimensions, you may need to recreate your Qdrant collection. You can delete the collection through the Qdrant Dashboard at [http://qdrant.localhost/dashboard](http://qdrant.localhost/dashboard). Therefore, it is better to plan ahead which embedding model is most suitable for your workflows.
-
-### Guides
-
-#### Creating Your First Hierarchical Team
-
-Log into Tribe using the email and password you set during the installation step.
-
-![login](./img/hierarchical-tutorial/login.png)
-
-Navigate to the 'Teams' page and click on 'Add Team'. Enter a name for your team and click 'Save'.
-
-![create team](./img/hierarchical-tutorial/create-team.png)
-
-Create two additional team members by dragging the handle of the Team Leader node.
-
-![create members](./img/hierarchical-tutorial/create-members.png)
-
-Update the first team member as shown.
-
-![update member 1](./img/hierarchical-tutorial/update-member-1.png)
-
-Update the second team member as shown.
-
-![update member 2](./img/hierarchical-tutorial/update-member-2.png)
-
-Go to the 'Chat' tab and send a question to your team to see how they respond.
-
-![chat](./img/hierarchical-tutorial/chat.png)
-
-Congratulations! You’ve successfully built and communicated with your first multi-agent team on Tribe.
-
-#### Equipping Your Team Member with Skills
-
-Your team member can do more by providing it with a set of skills. Add a skill to your Foodie.
-
-![add skill](./img/skills-tutorial/adding-skill.png)
-
-Now, when you ask your Foodie a question, it will search the web for more up-to-date information!
-
-![chat](./img/skills-tutorial/chat.png)
-
-#### Creating Your First Sequential Team
-
-Create a new team and select the 'Sequential' workflow.
-
-![create team](./img/sequential-tutorial/create-team.png)
-
-Drag and drop to create another team member below 'Worker0'.
-
-![create members](./img/sequential-tutorial/create-members.png)
-
-Update the first team member as shown. Provide the 'wikipedia' skill to this team member.
-
-![update member 1](./img/sequential-tutorial/update-member-1.png)
-
-Update the second team member as shown.
-
-![update member 2](./img/sequential-tutorial/update-member-2.png)
-
-Go to the 'Chat' tab and send a question to your team to see how they respond. Notice that the Researcher will use Wikipedia to do its research. Very cool!
-
-![chat](./img/sequential-tutorial/chat.png)
-
-#### Requiring Human Approval Before Skill Execution in Sequential Workflows
-
-You can require your team members to wait for your approval before executing their skills. Edit your Researcher and select 'Require approval'.
-
-![enable human approval](./img/human-approval-tutorial/enable-human-approval.png)
-
-Now, before the Researcher executes its skills, it will ask you to approve or reject.
-
-![chat before approval](./img/human-approval-tutorial/chat-before-approval.png)
-
-If you approve, the Researcher will continue to execute its skills.
-
-![chat after approval](./img/human-approval-tutorial/chat-after-approval.png)
-
-## Contribution
-
-Tribe is open sourced and welcome contributions from the community! Check out our [contribution guide](./CONTRIBUTING.md) to get started.
-
-Some ways to contribute:
-- Report bugs and issues.
-- Enhance our documentation.
-- Suggest or contribute new features or enhancements.
-
-## Release Notes
-
-Check the file [release-notes.md](./release-notes.md).
-
-## License
-
-Tribe is licensed under the terms of the MIT license.
+¡Gracias por tu interés en este proyecto!
