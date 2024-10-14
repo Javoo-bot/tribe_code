@@ -64,8 +64,8 @@ class Settings(BaseSettings):
             host=self.POSTGRES_SERVER, 
             port=self.POSTGRES_PORT,  
             path=self.POSTGRES_DB,    
-        )
-
+        )   #la URI resultante: postgresql+psycopg://admin:secret@localhost:5432/mydatabase
+          
     @computed_field  # type: ignore[misc]
     @property
     def PG_DATABASE_URI(self) -> str:  #construye una cadena de conexión y verifica si los datos se han mandado bien 

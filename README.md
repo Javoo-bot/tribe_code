@@ -15,6 +15,9 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
     - Config base de postgreSQL (escribiré en md de postgre)
         -Analizar como se ha configurado la app dentro del proyecto: config/core/alembic
     - Config de mi app
+    - Estudiar funcionamiento Azure endpoints
+    - Quickstart Azure
+    - Integracion en LM Studio 
 
 ### 2. Crear las Plantillas
 

@@ -35,4 +35,15 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
    - Almacenamiento seguro de claves y credenciales mediante variables de entorno.
 
 - **Core**
-   - ¿Que aprenderé aqui: crear y mantener conexion con PostgreSQL, como gestionar las sesiones y optimizar el rendimiento
+   - Base datos se gestiona usando alembic
+   - Falta explicacion si no se pudiese usar alembic 
+       - Definir modelos
+       - Conexion base datos (URI): postgresql+psycopg://admin:secret@localhost:5432/mydatabase
+       - Verificar existencia tablas
+       - Sino existen, crear tablas
+       - Agregar datos
+       - Copia de seguridad
+
+-**Models**
+   - ...
+
