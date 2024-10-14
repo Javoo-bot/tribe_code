@@ -2,12 +2,12 @@
 
 A continuación, se presenta el historial de comandos utilizados para establecer la conexión y trabajar con Azure Machine Learning desde la consola:
 
-## 1. Inicio de sesión en Azure CLI:
+## 1. Lo primero es iniciar sesion Azure CLI:
 ```bash
 az login
 ```
 
-## 2. Mostrar los grupos de recursos disponibles:
+## 2. Mostrar los recursos que tengo:
 ```bash
 az group list --output table
 ```
@@ -25,7 +25,7 @@ az provider register --namespace Microsoft.Storage
 ```
 
 
-## 5. Mostrar el estado de los proveedores de recursos registrados:
+## 5. Mostrar el estado de los proveedores de recursos registrados, todo tiene que ser "Registred":
 ```bash
 az provider show --namespace Microsoft.MachineLearningServices --query "registrationState"
 az provider show --namespace Microsoft.ContainerInstance --query "registrationState"
@@ -39,41 +39,35 @@ $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schem
 name: my-endpoint
 auth_mode: key
 ```
-Creamos un fichero deplyment.yml: aqui se establece el modelo, los recursos y el entorno
+
+Creamos un fichero deployment.yml: aqui se establece el modelo, los recursos y el entorno
+
+```bash
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: my-endpoint
+auth_mode: key
+model:
+  uri: azureml://registries/azureml/models/TuModelo/versions/1
+environment: azureml:my-environment:1
+code_configuration:
+  code:
+    path: ./src  # Ruta a tu código de inferencia
+  scoring_script: score.py  # Script que hará las predicciones
+instance_type: Standard_DS2_v2
+instance_count: 1
+```
 
 ## 6b. Intento de creación de un endpoint en tiempo real (con error):
 ```bash
 az ml online-endpoint create --name my-endpoint --file endpoint.yml --resource-group UO250680-rg --workspace-name Tribe
 ```
 
-## 7. Comando para eliminar un endpoint existente (por problemas previos):
-```bash
-az ml online-endpoint delete --name my-endpoint --resource-group UO250680-rg --workspace-name Tribe --yes
-```
+#pero me da error 
 
-## 8. Intento de actualización del endpoint (con error):
-```bash
-az ml online-endpoint update --name my-endpoint --file endpoint.yml --resource-group UO250680-rg --workspace-name Tribe
-```
-
-## 9. Ver roles asignados a una cuenta específica en el grupo de recursos:
+## 7. Ver roles asignados a una cuenta específica en el grupo de recursos:
 ```bash
 az role assignment list --assignee uo250680@uniovi.es --resource-group UO250680-rg
 ```
+Si me da owner entoncer el problema esta en otro lado...
 
-## 10. Asignar rol "Owner" a tu cuenta en el grupo de recursos:
-```bash
-az role assignment create --assignee uo250680@uniovi.es --role "Owner" --scope /subscriptions/67067181-ef52-4533-b974-a6ad9c1273fd/resourceGroups/UO250680-rg
-```
-
-## 11. Intento de creación de un endpoint "serverless" con configuración modificada:
-```bash
-az ml online-endpoint create --name my-serverless-endpoint --file endpoint.yml --resource-group UO250680-rg --workspace-name Tribe
-```
-
-## 12. Mostrar el estado de la suscripción activa:
-```bash
-az account show
-```
-
-
+Probar el proximo dia si el problema esta en la región donde estás desplegando el modelo es compatible con el tipo de modelo que estás utilizando...
