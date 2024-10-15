@@ -3,3 +3,5 @@
 .DS_Store
 venv
 backend/app/core/graph/skills/
+.env
+connection.yml
