@@ -67,15 +67,20 @@ az role assignment list --assignee uo250680@uniovi.es --resource-group UO250680-
        - La API
        - Para probar el modelo de chat usamos el kit de software de Azure
 
-## 9. Error al instalar azure:
-      - Creo Dockerifile
-      - Construyo imagen:
-       ```docker
-       docker build -t mi_entorno_python .
-       ```
-      - Ejecuto contenedor:
-      ```docker
-       docker run mi_entorno_python
-       ```
+## 9. Error al instalar Azure:
 
+  1. **Creo Dockerfile**: 
+   - Defino el archivo `Dockerfile` con la configuración necesaria.
+
+  2. **Construyo la imagen**: 
+   - Utilizo el siguiente comando para construir la imagen:
+     ```bash
+     docker build -t mi_entorno_python .
+     ```
+
+  3. **Ejecuto el contenedor**: 
+   - Una vez construida la imagen, ejecuto el contenedor con:
+     ```bash
+     docker run mi_entorno_python
+     ```
 

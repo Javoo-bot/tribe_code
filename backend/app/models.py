@@ -3,40 +3,42 @@ from enum import Enum
 from typing import Any
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel
-from pydantic import Field as PydanticField
-from sqlalchemy import (
-    JSON,
-    Column,
+from pydantic import BaseModel # type: ignore
+from pydantic import Field as PydanticField # type: ignore
+from sqlalchemy import ( # type: ignore
+    JSON,   # el formato para pasar el token de acceso
+    Column, # ahora las 5 columnas que va a tener el modelo  
     DateTime,
     PrimaryKeyConstraint,
     UniqueConstraint,
     func,
 )
-from sqlalchemy import (
-    Enum as SQLEnum,
+from sqlalchemy import ( # type: ignore
+    Enum as SQLEnum, # enumerar las filas y columnas 
 )
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel # type: ignore
 
 from app.core.graph.messages import ChatResponse
 
 
-class Message(SQLModel):
+#configuracion inicial: mensajes, token y nueva contraseña 
+
+class Message(SQLModel):  # se van a grabar los mensajes de la applicacion
     message: str
 
 
-# JSON payload containing access token
+# JSON payload contiene el token de acceso 
 class Token(SQLModel):
     access_token: str
     token_type: str = "bearer"
 
 
-# Contents of JWT token
+# Contents of JWT token que no se van a usar
 class TokenPayload(SQLModel):
     sub: int | None = None
 
 
-class NewPassword(SQLModel):
+class NewPassword(SQLModel): # si hubiese nueva contraseña se guarda aqui 
     token: str
     new_password: str
 
@@ -44,19 +46,19 @@ class NewPassword(SQLModel):
 # ===============USER========================
 
 
-class UserBase(SQLModel):
+class UserBase(SQLModel):  # datos basicos del usuario 
     email: str = Field(unique=True, index=True)
     is_active: bool = True
     is_superuser: bool = False
     full_name: str | None = None
 
 
-# Properties to receive via API on creation
-class UserCreate(UserBase):
+
+class UserCreate(UserBase):  # Propiedad que se recibe cuando se crea la API
     password: str
 
 
-# TODO replace email str with EmailStr when sqlmodel supports it
+# Abrimos la conexion del usuario 
 class UserCreateOpen(SQLModel):
     email: str
     password: str
@@ -64,7 +66,6 @@ class UserCreateOpen(SQLModel):
 
 
 # Properties to receive via API on update, all are optional
-# TODO replace email str with EmailStr when sqlmodel supports it
 class UserUpdate(UserBase):
     email: str | None = None  # type: ignore
     password: str | None = None
@@ -75,13 +76,13 @@ class UserUpdateMe(SQLModel):
     full_name: str | None = None
     email: str | None = None
 
-
 class UpdatePassword(SQLModel):
     current_password: str
     new_password: str
 
 
-# Database model, database table inferred from class name
+# Tabla db donde usuario tiene id, password, equipo, habilidads y subidas asignadas 
+# a su perfil
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     hashed_password: str
@@ -90,7 +91,7 @@ class User(UserBase, table=True):
     uploads: list["Upload"] = Relationship(back_populates="owner")
 
 
-# Properties to return via API, id is always required
+# La respuesta de la API siempre contiene el id
 class UserOut(UserBase):
     id: int
 

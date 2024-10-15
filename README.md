@@ -13,12 +13,13 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
   - Dada la complegidad y longuitud de las plantillas del kit digital entonces creo las plantillas mockeadas
   - Entender esquema de subidas en mi aplicacion de postgreSQL
     - Config base de postgreSQL (escribiré en md de postgre)
-        -Analizar como se ha configurado la app dentro del proyecto: config/core/alembic
+        - Analizar como se ha configurado la app dentro del proyecto: config/core/alembic
     - Config de mi app
     - Estudiar funcionamiento Azure endpoints
     - Quickstart Azure
     - Integracion en LM Studio 
-
+      - Prueba del modelo en script
+    
 ### 2. Crear las Plantillas
 
 ### 3. Cargar las Plantillas en PostgreSQL
