@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 
 # Instalar las dependencias, incluido azure-ai-inference
-RUN pip install azure-ai-inference azure-core python-dotenv
+RUN pip install azure-ai-inference azure-core python-dotenv openai
 
 # Definir el comando por defecto para ejecutar test.py
-CMD ["python", "test.py"]
+CMD ["python", "quickstart.py"]

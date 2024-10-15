@@ -83,4 +83,5 @@ az role assignment list --assignee uo250680@uniovi.es --resource-group UO250680-
      ```bash
      docker run mi_entorno_python
      ```
+  
 
