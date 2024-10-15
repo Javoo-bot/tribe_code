@@ -1,0 +1,5 @@
+# Ignorar el archivo connections.yml
+connections.yml
+
+# Ignorar el archivo .env
+.env
