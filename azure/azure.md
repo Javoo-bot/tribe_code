@@ -2,6 +2,10 @@
 
 A continuación, se presenta el historial de comandos utilizados para establecer la conexión y trabajar con Azure Machine Learning desde la consola:
 
+## 0 . Crear enviroment en estas zonas:
+    - East US 2
+    - Sweden 
+    
 ## 1. Lo primero es iniciar sesion Azure CLI:
 ```bash
 az login
