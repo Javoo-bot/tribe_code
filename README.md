@@ -13,10 +13,12 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
 
 ### 2. Configuración de la Base de Datos PostgreSQL
 
-- [ ] **Comprender el esquema de cargas en la aplicación con PostgreSQL.**
+- [x] **Comprender el esquema de cargas en la aplicación con PostgreSQL.**
   - [x] Configurar la base de datos PostgreSQL (escribir documentación en Markdown).
   - [ ] Analizar la configuración en `config/core/alembic`.
-  - [ ] Examinar los modelos en `backend/app`.
+    - [x] Mirar definicion enviroment 
+    - [x] Ver migraciones
+  - [x] Examinar los modelos en `backend/app`.
 
 ### 3. Configuración de la Aplicación
 
@@ -25,7 +27,7 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
   - [x] Integrar con **Azure Machine Learning Studio**.
   - [x] Probar el modelo mediante un script para verificar su correcto funcionamiento.
     
-    
+ 
 ### 2. Crear las Plantillas
 
 ### 3. Cargar las Plantillas en PostgreSQL

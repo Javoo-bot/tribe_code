@@ -21,32 +21,38 @@ from sqlmodel import Field, Relationship, SQLModel # type: ignore
 from app.core.graph.messages import ChatResponse
 
 
-#configuracion inicial: mensajes, token y nueva contraseña 
+# Modelos para almacenar mensajes, tokens de acceso y contraseñas en la base de datos
 
-class Message(SQLModel):  # se van a grabar los mensajes de la applicacion
+class Message(SQLModel):  # tabla para almacenar mensajes de la aplicación
     message: str
 
 
-# JSON payload contiene el token de acceso 
+# Modelo que almacena los tokens de acceso
+ ## usado en la autenticación de usuarios
+# El payload JSON incluye el token y el token es por defecto 'bearer'
+
 class Token(SQLModel):
     access_token: str
     token_type: str = "bearer"
 
 
-# Contents of JWT token que no se van a usar
+# payload de un Jason web token
+ ## se almacena el campo 'sub' aunque no se use directamente
+
 class TokenPayload(SQLModel):
     sub: int | None = None
 
-
-class NewPassword(SQLModel): # si hubiese nueva contraseña se guarda aqui 
+# almacena el token de autenticación y una nueva contraseña 
+ ## usuario solicita el cambio de contraseña
+class NewPassword(SQLModel):  
     token: str
     new_password: str
 
 
 # ===============USER========================
 
-
-class UserBase(SQLModel):  # datos basicos del usuario 
+# datos basicos del usuario 
+class UserBase(SQLModel):  
     email: str = Field(unique=True, index=True)
     is_active: bool = True
     is_superuser: bool = False
@@ -58,7 +64,7 @@ class UserCreate(UserBase):  # Propiedad que se recibe cuando se crea la API
     password: str
 
 
-# Abrimos la conexion del usuario 
+# Crea nuevo usuario con los datos necesarios  
 class UserCreateOpen(SQLModel):
     email: str
     password: str
@@ -81,8 +87,8 @@ class UpdatePassword(SQLModel):
     new_password: str
 
 
-# Tabla db donde usuario tiene id, password, equipo, habilidads y subidas asignadas 
-# a su perfil
+# Tabla ntermedia para enlazar miembros con uploads
+## utilizada para manejar relaciones muchos-a-muchos
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     hashed_password: str
@@ -91,7 +97,8 @@ class User(UserBase, table=True):
     uploads: list["Upload"] = Relationship(back_populates="owner")
 
 
-# La respuesta de la API siempre contiene el id
+# Si hacemos peticiones a la API aqui aparece lo que nos devolvera
+
 class UserOut(UserBase):
     id: int
 
@@ -103,59 +110,60 @@ class UsersOut(SQLModel):
 
 # ==============TEAM=========================
 
-
+# Modelo que se usa para crear un equipo nuevo
+# Hereda del modelo base y añade el campo de workflow (flujo de trabajo)
 class TeamBase(SQLModel):
     name: str = PydanticField(pattern=r"^[a-zA-Z0-9_-]{1,64}$")
     description: str | None = None
 
-
+# crear un equipo nuevo
 class TeamCreate(TeamBase):
     workflow: str
 
-
+# actualizar la info de un equipo
 class TeamUpdate(TeamBase):
     name: str | None = PydanticField(pattern=r"^[a-zA-Z0-9_-]{1,64}$", default=None)  # type: ignore[assignment]
 
-
+# enumera que tipo de mensajes estan permitidos
 class ChatMessageType(str, Enum):
     human = "human"
     ai = "ai"
 
-
+# ejemplo de mensaje en un chat
+## Cada mensaje tiene un tipo (human o ai) y un contenido
 class ChatMessage(BaseModel):
     type: ChatMessageType
     content: str
 
-
+# manera de interrupcion en el chat
 class InterruptDecision(Enum):
     APPROVED = "approved"
     REJECTED = "rejected"
 
-
+# modelo que representa interrupcion en chat
 class Interrupt(BaseModel):
     decision: InterruptDecision
 
-
+# Modelo que representa un chat de equipo
+# Contiene una lista de mensajes y una decisión de interrupción opcional
 class TeamChat(BaseModel):
     messages: list[ChatMessage]
     interrupt_decision: InterruptDecision | None = None
 
-
+# Modelo para representar un equipo en la base de datos
+# Incluye relaciones con usuarios (owner), miembros, y threads
 class Team(TeamBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    name: str = Field(regex=r"^[a-zA-Z0-9_-]{1,64}$", unique=True)
-    owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)
-    owner: User | None = Relationship(back_populates="teams")
-    members: list["Member"] = Relationship(
-        back_populates="belongs", sa_relationship_kwargs={"cascade": "delete"}
-    )
-    workflow: str  # TODO: This should be an enum 'sequential' and 'hierarchical'
-    threads: list["Thread"] = Relationship(
-        back_populates="team", sa_relationship_kwargs={"cascade": "delete"}
-    )
+    name: str = Field(regex=r"^[a-zA-Z0-9_-]{1,64}$", unique=True)  # Nombre único
+    owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)  # Clave foránea a User
+    owner: User | None = Relationship(back_populates="teams")  # Relación con el propietario (User)
+    members: list["Member"] = Relationship(back_populates="belongs", sa_relationship_kwargs={"cascade": "delete"})  # Relación con los miembros del equipo
+    workflow: str
+    threads: list["Thread"] = Relationship(back_populates="team", sa_relationship_kwargs={"cascade": "delete"})  # Relación con los threads
 
 
-# Properties to return via API, id is always required
+
+# Modelo que sirve para devolver información del equipo al hacer peticiones a la API
 class TeamOut(TeamBase):
     id: int
     owner_id: int
@@ -169,7 +177,9 @@ class TeamsOut(SQLModel):
 
 # =============Threads===================
 
-
+# Creamos el thread y va a ser un string
+  ## le añadimos la caapcidad de almacenar modificaciones
+# Le añadimos una config inicial: id, updated_At,team_id,team,checkpoints,writes
 class ThreadBase(SQLModel):
     query: str
 
@@ -209,6 +219,7 @@ class Thread(ThreadBase, table=True):
     )
 
 
+# Si hacemos peticion a la Api nos devuelve esto
 class ThreadOut(SQLModel):
     id: UUID
     query: str
@@ -226,7 +237,7 @@ class ThreadsOut(SQLModel):
 
 # ==============MEMBER=========================
 
-
+# Creamos tabla para los miembros 
 class MemberSkillsLink(SQLModel, table=True):
     member_id: int | None = Field(
         default=None, foreign_key="member.id", primary_key=True

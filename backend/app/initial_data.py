@@ -1,6 +1,6 @@
 import logging
 
-from sqlmodel import Session
+from sqlmodel import Session # type: ignore
 
 from app.core.db import engine, init_db
 
