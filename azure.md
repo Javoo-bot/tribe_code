@@ -84,5 +84,14 @@ az role assignment list --assignee uo250680@uniovi.es --resource-group UO250680-
      docker run mi_entorno_python
      ```
   
-  4. 
+## 10. Debugging errores API
 
+  - Estoy en Azure AI y buscando modelos disponibles en mi regino para implementar
+  - Testeo en Postman de los requerimientos
+  - Si funciona en postman, probar en contenedor de docker creado para probar Azure
+  - Si funciona en contenedor entonces funciona en VS Code y se puede usar en la Aplicacion
+  - Pero no funciona la API
+  - Problema : baja cuota debido tipo de cuenta
+  - Soluciones : investigar aumento de cuota 
+  - Modelo gpt-3.5 turbo funciona en mi region (westeu) y con mi cuenta student
+  - Ya entendi diseño peticion en postman

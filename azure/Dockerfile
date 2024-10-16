@@ -1,12 +1,13 @@
 FROM python:3.12-slim
 
+# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar el código (incluido test.py)
+# Copiar los archivos del proyecto (incluyendo el script y el .env) al contenedor
 COPY . .
 
-# Instalar las dependencias, incluido azure-ai-inference
-RUN pip install azure-ai-inference azure-core python-dotenv openai
+# Instalar las dependencias desde requirements.txt
+RUN pip install --no-cache-dir requests python-dotenv
 
-# Definir el comando por defecto para ejecutar test.py
+# Definir el comando por defecto para ejecutar quickstart.py
 CMD ["python", "quickstart.py"]

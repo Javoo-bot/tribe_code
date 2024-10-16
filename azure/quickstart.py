@@ -1,16 +1,40 @@
 import os
-from openai import AzureOpenAI # type: ignore
+import requests
+import dotenv
+
+dotenv.load_dotenv()
+
+deployment_name = os.environ['COMPLETIONS_MODEL']
+openai_api_base = os.environ['AZURE_OPENAI_ENDPOINT']
+openai_api_key = os.environ['AZURE_OPENAI_API_KEY']
+openai_api_version = os.environ['OPENAI_API_VERSION']
+
+api_url = f"https://testeo2.openai.azure.com/openai/deployments/gpt-35-turbo/completions?api-version=2024-08-01-preview"
+
+# Example prompt for request payload
+prompt = "Hello world"
+
+json_data = {
+  "prompt": prompt,
+  "temperature": 0,
+  "max_tokens": 30
+}
+
+# Including the api-key in HTTP headers
+headers =  {"api-key": openai_api_key}
+
+try: 
+  # Request for creating a completion for the provided prompt and parameters
+  response = requests.post(api_url, json=json_data, headers=headers)
+
+  completion = response.json()
     
-client = AzureOpenAI(
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),  
-    api_version="2024-02-01",
-    azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-    )
+  # print the completion
+  print(completion['choices'][0]['text'])
     
-deployment_name='gpt-4o-mini' #This will correspond to the custom name you chose for your deployment when you deployed a model. Use a gpt-35-turbo-instruct deployment. 
-    
-# Send a completion call to generate an answer
-print('Sending a test completion job')
-start_phrase = 'Write a tagline for an ice cream shop. '
-response = client.completions.create(model=deployment_name, prompt=start_phrase, max_tokens=10)
-print(start_phrase+response.choices[0].text)
+  # Here indicating if the response is filtered
+  if completion['choices'][0]['finish_reason'] == "content_filter":
+    print("The generated content is filtered.")
+
+except:
+    print("An exception has occurred. \n")
