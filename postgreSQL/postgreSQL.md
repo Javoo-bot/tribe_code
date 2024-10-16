@@ -36,7 +36,8 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
 
 - **Core**
    - Base datos se gestiona usando alembic
-   - Falta explicacion si no se pudiese usar alembic 
+   - En alembic se gestiona todo
+   - Sino funcionase alembic (puede pasar) habria que: 
        - Definir modelos
        - Conexion base datos (URI): postgresql+psycopg://admin:secret@localhost:5432/mydatabase
        - Verificar existencia tablas
@@ -45,5 +46,5 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
        - Copia de seguridad
 
 -**Models**
-   - ...
+   - 
 

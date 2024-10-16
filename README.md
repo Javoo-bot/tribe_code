@@ -6,19 +6,25 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
 
 ## 🚀 Flujo de Trabajo
 
-### 1. Almacenar Información de las Plantillas
+### 1. Selección y Preparación de Plantillas
 
-- **Selección de Plantillas**
-  - Identificar y seleccionar las plantillas necesarias para el proyecto.
-  - Dada la complegidad y longuitud de las plantillas del kit digital entonces creo las plantillas mockeadas
-  - Entender esquema de subidas en mi aplicacion de postgreSQL
-    - Config base de postgreSQL (escribiré en md de postgre)
-        - Analizar como se ha configurado la app dentro del proyecto: config/core/alembic
-    - Config de mi app
-    - Estudiar funcionamiento Azure endpoints
-    - Quickstart Azure
-    - Integracion en LM Studio 
-      - Prueba del modelo en script
+- [x] **Identificar y seleccionar las plantillas necesarias para el proyecto.**
+- [x] Crear **plantillas mockeadas** debido a la complejidad y longitud de las originales.
+
+### 2. Configuración de la Base de Datos PostgreSQL
+
+- [ ] **Comprender el esquema de cargas en la aplicación con PostgreSQL.**
+  - [x] Configurar la base de datos PostgreSQL (escribir documentación en Markdown).
+  - [ ] Analizar la configuración en `config/core/alembic`.
+  - [ ] Examinar los modelos en `backend/app`.
+
+### 3. Configuración de la Aplicación
+
+- [x] **Estudiar el funcionamiento de los endpoints de Azure.**
+  - [x] Seguir el **Quickstart de Azure** para familiarizarse con los servicios.
+  - [x] Integrar con **Azure Machine Learning Studio**.
+  - [x] Probar el modelo mediante un script para verificar su correcto funcionamiento.
+    
     
 ### 2. Crear las Plantillas
 
