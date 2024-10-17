@@ -70,7 +70,7 @@ Queda por mirar que consultas lentas hay en PostgreSQL. Esto se puede hacer con 
 -**Initial data**
    - Iniciar bd e insertar datos cuando la aplicación comienza.
 
-## Pasos creacion nueva tabla: ampliar memoria del LLM + conocimiento especifico + contexto 
+## Pasos jueves creacion nueva tabla: ampliar memoria del LLM + conocimiento especifico + contexto 
 
    - Nuevo modelo en models.py : nuevos atributos, relaciones y restricciones
    - Nueva migracion en alembic

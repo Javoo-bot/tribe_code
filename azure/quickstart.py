@@ -2,39 +2,51 @@ import os
 import requests
 import dotenv
 
+# Load environment variables from .env file
 dotenv.load_dotenv()
 
-deployment_name = os.environ['COMPLETIONS_MODEL']
-openai_api_base = os.environ['AZURE_OPENAI_ENDPOINT']
-openai_api_key = os.environ['AZURE_OPENAI_API_KEY']
-openai_api_version = os.environ['OPENAI_API_VERSION']
+# Extracting environment variables for API configuration
+deployment_name = os.environ.get('COMPLETIONS_MODEL')
+openai_api_base = os.environ.get('AZURE_OPENAI_ENDPOINT')
+openai_api_key = os.environ.get('AZURE_OPENAI_API_KEY')
+openai_api_version = os.environ.get('OPENAI_API_VERSION')
 
-api_url = f"https://testeo2.openai.azure.com/openai/deployments/gpt-35-turbo/completions?api-version=2024-08-01-preview"
+# Construct the API URL using environment variables
+api_url = f"{openai_api_base}/openai/deployments/{deployment_name}/chat/completions?api-version={openai_api_version}"
 
-# Example prompt for request payload
-prompt = "Hello world"
-
+# Example prompt for the request payload
 json_data = {
-  "prompt": prompt,
-  "temperature": 0,
-  "max_tokens": 30
+ "messages": [
+  {
+   "role": "system",
+   "content": "you're a helpful assistant that talks like a pirate"
+  },
+  {
+   "role": "user",
+   "content": "can you tell me how to care for a parrot?"
+  }
+ ]
 }
 
 # Including the api-key in HTTP headers
-headers =  {"api-key": openai_api_key}
+headers = {
+    "api-key": openai_api_key,
+    "Content-Type": "application/json"
+}
 
 try: 
-  # Request for creating a completion for the provided prompt and parameters
-  response = requests.post(api_url, json=json_data, headers=headers)
+    # Request for creating a completion for the provided prompt and parameters
+    response = requests.post(api_url, json=json_data, headers=headers)
+    response.raise_for_status()  # Raise an error for bad HTTP status codes
 
-  completion = response.json()
+    completion = response.json()
     
-  # print the completion
-  print(completion['choices'][0]['text'])
+    # Print the completion text
+    print(completion['choices'][0]['message']['content'])
     
-  # Here indicating if the response is filtered
-  if completion['choices'][0]['finish_reason'] == "content_filter":
-    print("The generated content is filtered.")
+    # Check if the response was filtered
+    if completion['choices'][0].get('finish_reason') == "content_filter":
+        print("The generated content is filtered.")
 
-except:
-    print("An exception has occurred. \n")
+except requests.exceptions.RequestException as e:
+    print(f"An error occurred: {e}")
