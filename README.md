@@ -15,7 +15,7 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
 
 - [x] **Comprender el esquema de cargas en la aplicación con PostgreSQL.**
   - [x] Configurar la base de datos PostgreSQL (escribir documentación en Markdown).
-  - [ ] Analizar la configuración en `config/core/alembic`.
+  - [x] Analizar la configuración en `config/core/alembic`.
     - [x] Mirar definicion enviroment 
     - [x] Ver migraciones
   - [x] Examinar los modelos en `backend/app`.
@@ -41,13 +41,12 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
    - [x] Ejecutar el archivo SQL en una base de datos SQLite para crear las tablas.
    - [x] Insertar datos de prueba en las tablas `Template` y `Client`.
    - [x] Levantar solo el contenedor de PostgreSQL: `docker-compose -f docker-compose.yml -f docker-compose.local.yml up db adminer`
-   - [ ] **Conectar directamente a PostgreSQL desde VS Code o psql**
-   - [ ] **Verificar que el contenedor de PostgreSQL está corriendo**
-   - [ ] **Conectar desde VS Code usando la extensión de PostgreSQL**
-   - [ ] **Configurar Alembic para conectarse a PostgreSQL**
-   - [ ] **Hacer migración con Alembic**
+   - [x] **Conectar directamente a PostgreSQL desde VS Code o psql**
+   - [x] **Verificar que el contenedor de PostgreSQL está corriendo**
+   - [x] **Conectar desde VS Code usando la extensión de PostgreSQL**
+   - [x] **Configurar Alembic para conectarse a PostgreSQL**
+   - [x] **Documentar como sería migración con Alembic**
 
-  
 **Separación de preocupaciones**: Al separar la gestión de la base de datos de la lógica del backend, garantizamos que la infraestructura de la base de datos se mantenga estable 
 
 **Facilidad para migrar entre entornos**
