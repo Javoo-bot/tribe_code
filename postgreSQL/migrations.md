@@ -75,6 +75,10 @@ Una vez que se haya ejecutado el archivo, puedes verificar que las tablas y los 
 - **Pruebas Rápidas con SQLite**: Puedes probar primero en SQLite y luego portar el `.sql` a PostgreSQL para probar.
 - **Migraciones con Alembic**: Si todo funciona correctamente, podrías convertir estos cambios en una migración formal usando Alembic para integrarlos de manera estable en tu proyecto sin necesidad de "hardcodearlo" en el backend.
 
+* After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
+
+```console
+$ alembic revision --autogenerate -m "Add column last_name to User model"
 Con estos pasos, podrás cargar fácilmente archivos `.sql` en tu base de datos PostgreSQL dentro de Docker para realizar pruebas y verificaciones sin complicaciones adicionales.
 
 
