@@ -77,8 +77,9 @@ Una vez que se haya ejecutado el archivo, puedes verificar que las tablas y los 
 
 * After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
 
-```console
+```bash
 $ alembic revision --autogenerate -m "Add column last_name to User model"
+```
 Con estos pasos, podrás cargar fácilmente archivos `.sql` en tu base de datos PostgreSQL dentro de Docker para realizar pruebas y verificaciones sin complicaciones adicionales.
 
 
