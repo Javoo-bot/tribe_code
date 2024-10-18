@@ -70,7 +70,53 @@ Una vez que se haya ejecutado el archivo, puedes verificar que las tablas y los 
   SELECT * FROM template;
   ```
 
-### Notas Finales
+## Instrucciones para Levantar PostgreSQL con Puerto Expuesto
+
+Para exponer el puerto de PostgreSQL y poder conectarte desde fuera del contenedor, sigue estos pasos:
+
+1. **Modifica el Archivo `docker-compose.override.yml` o `docker-compose.local.yml`**:
+
+   Asegúrate de que el servicio `db` tenga la configuración para exponer el puerto `5432`. Debería verse algo así:
+
+   ```yaml
+   services:
+     db:
+       restart: "no"
+       ports:
+         - "5432:5432"
+   ```
+
+2. **Levantar el Contenedor con la Configuración Adicional**:
+
+   Usa el siguiente comando para levantar los contenedores asegurándote de incluir los archivos de configuración necesarios:
+
+   ```bash
+   docker-compose -f docker-compose.yml -f docker-compose.local.yml up db adminer
+   ```
+
+   Esto garantizará que el contenedor de PostgreSQL está corriendo y que el puerto `5432` está expuesto para acceder a él desde fuera del contenedor.
+
+3. **Verificar el Estado del Contenedor**:
+
+   Ejecuta el siguiente comando para verificar que el contenedor esté corriendo y que el puerto esté correctamente expuesto:
+
+   ```bash
+   docker ps
+   ```
+
+   En la columna de **PORTS** debería aparecer `0.0.0.0:5432->5432/tcp` indicando que el puerto está disponible.
+
+4. **Conectar a PostgreSQL**:
+
+   Ahora puedes usar cualquier cliente de PostgreSQL para conectarte a la base de datos utilizando:
+
+   - **Host**: `localhost`
+   - **Puerto**: `5432`
+   - **Usuario**: El valor de `POSTGRES_USER` en tu archivo `.env`
+   - **Contraseña**: El valor de `POSTGRES_PASSWORD` en tu archivo `.env`
+   - **Base de datos**: El valor de `POSTGRES_DB` en tu archivo `.env`
+
+## Notas Finales
 
 - **Pruebas Rápidas con SQLite**: Puedes probar primero en SQLite y luego portar el `.sql` a PostgreSQL para probar.
 - **Migraciones con Alembic**: Si todo funciona correctamente, podrías convertir estos cambios en una migración formal usando Alembic para integrarlos de manera estable en tu proyecto sin necesidad de "hardcodearlo" en el backend.
@@ -80,7 +126,5 @@ Una vez que se haya ejecutado el archivo, puedes verificar que las tablas y los 
 ```bash
 $ alembic revision --autogenerate -m "Add column last_name to User model"
 ```
+
 Con estos pasos, podrás cargar fácilmente archivos `.sql` en tu base de datos PostgreSQL dentro de Docker para realizar pruebas y verificaciones sin complicaciones adicionales.
-
-
-
