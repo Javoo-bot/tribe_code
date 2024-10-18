@@ -2,6 +2,6 @@
 .env
 .DS_Store
 venv
-backend/app/core/graph/skills/
+backend/app/core/graph/skills/ciber_skills
 .env
 connection.yml
