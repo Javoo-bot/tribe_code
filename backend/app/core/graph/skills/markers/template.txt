@@ -1,0 +1,72 @@
+------------------------------
+**CONTRATO DE SERVICIOS DE CIBERSEGURIDAD**
+------------------------------
+
+**Entre**: 
+
+**{{Nombre_Empresa_Cliente}}**, con domicilio en **{{Direccion_Cliente}}**, representada por **{{Representante_Cliente}}**, en adelante "EL CLIENTE".
+
+**Y**: 
+
+**{{Nombre_Empresa_Ciberseguridad}}**, con domicilio en **{{Direccion_Empresa_Ciberseguridad}}**, representada por **{{Representante_Ciberseguridad}}**, en adelante "EL PROVEEDOR".
+
+**Ambas partes acuerdan lo siguiente**:
+
+### 1. OBJETO DEL CONTRATO
+
+El presente contrato tiene como objeto la prestación de servicios de ciberseguridad por parte de EL PROVEEDOR para EL CLIENTE, con el objetivo de proteger la infraestructura tecnológica de EL CLIENTE contra amenazas y vulnerabilidades, conforme a los términos descritos a continuación.
+
+### 2. SERVICIOS PRESTADOS
+
+EL PROVEEDOR proporcionará los siguientes servicios:
+
+- Auditorías de seguridad.
+- Análisis de vulnerabilidades y pruebas de penetración.
+- Monitoreo continuo de incidentes de seguridad.
+- Consultoría y recomendaciones para mitigación de riesgos.
+- Cualquier otro servicio acordado por ambas partes.
+
+### 3. DURACIÓN
+
+La duración del contrato será de **{{Duracion_Contrato}}** meses a partir de la fecha de firma del presente documento. El contrato podrá ser renovado mediante acuerdo mutuo por escrito entre EL CLIENTE y EL PROVEEDOR.
+
+### 4. OBLIGACIONES DEL PROVEEDOR
+
+- Proporcionar los servicios descritos en la sección 2.
+- Mantener la confidencialidad de toda la información proporcionada por EL CLIENTE.
+- Garantizar que el personal asignado tenga la cualificación necesaria para llevar a cabo los servicios.
+
+### 5. OBLIGACIONES DEL CLIENTE
+
+- Proporcionar acceso a la infraestructura necesaria para la realización de los servicios.
+- Proporcionar la información requerida por EL PROVEEDOR para la ejecución de los servicios.
+
+### 6. REMUNERACIÓN
+
+EL CLIENTE se compromete a pagar a EL PROVEEDOR la suma de **{{Importe_Contrato}}** euros, impuestos no incluidos, por los servicios prestados. El pago se realizará según el siguiente calendario: **{{Calendario_Pagos}}**.
+
+### 7. CONFIDENCIALIDAD
+
+Ambas partes acuerdan que toda la información intercambiada en virtud del presente contrato será tratada con el máximo nivel de confidencialidad, y no será divulgada a terceros sin el consentimiento previo por escrito de la otra parte.
+
+### 8. TERMINACIÓN DEL CONTRATO
+
+Cualquiera de las partes podrá dar por terminado el presente contrato con un preaviso de **{{Preaviso_Terminacion}}** días, siempre que exista justa causa y se haya comunicado por escrito a la otra parte.
+
+### 9. LEGISLACIÓN APLICABLE
+
+Este contrato se regirá e interpretará de acuerdo con las leyes de **{{Pais_Jurisdiccion}}**.
+
+### 10. FIRMAS
+
+En prueba de conformidad, ambas partes firman el presente contrato en **{{Lugar_Firma}}**, a **{{Fecha_Firma}}**.
+
+**EL CLIENTE**: 
+
+-------------------------------------------
+Firma: **{{Firma_Representante_Cliente}}**
+
+**EL PROVEEDOR**: 
+
+-------------------------------------------
+Firma: **{{Firma_Representante_Ciberseguridad}}**

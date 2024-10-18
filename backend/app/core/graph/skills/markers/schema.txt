@@ -1,0 +1,15 @@
+{{Nombre_Empresa_Cliente}}
+{{Direccion_Cliente}}
+{{Representante_Cliente}}
+{{Nombre_Empresa_Ciberseguridad}}
+{{Direccion_Empresa_Ciberseguridad}}
+{{Representante_Ciberseguridad}}
+{{Duracion_Contrato}}
+{{Importe_Contrato}}
+{{Calendario_Pagos}}
+{{Preaviso_Terminacion}}
+{{Pais_Jurisdiccion}}
+{{Lugar_Firma}}
+{{Fecha_Firma}}
+{{Firma_Representante_Cliente}}
+{{Firma_Representante_Ciberseguridad}}

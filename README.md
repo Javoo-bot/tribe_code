@@ -53,25 +53,13 @@ Este proyecto tiene como objetivo investigar si es posible un sistema eficiente 
 
 #### 2b. Plantillas
 
-- [] **Seleccionar el formato de las plantillas**: Se utilizarán archivos en formato **JSON** por su flexibilidad y facilidad para ser parseados.
-- [ ] Definir los **marcadores de posición** que serán reemplazados con los datos de los clientes en cada plantilla.
+  - [] Trabajar en archivo test.md
 
 #### 2c. Información del Cliente
 
-- [x] **Determinar cómo se recopilará la información del cliente**: Se utilizará un formulario web para recoger los datos.
-- [ ] Implementar la funcionalidad para almacenar los datos del cliente de forma segura en la base de datos.
-
 #### 2d. Módulo de Procesamiento de Formularios
 
-- [ ] Crear un módulo que recupere la plantilla correcta desde la base de datos.
-- [ ] Programar la sustitución de los **marcadores de posición** con los datos del cliente.
-- [ ] Guardar las plantillas completadas para su posterior uso.
-
 #### 2e. Motor de Plantillas
-
-- [x] **Seleccionar un motor de plantillas**: Se ha decidido usar **Jinja2** en Python para mejorar la eficiencia.
-- [ ] Implementar el uso de **Jinja2** en el módulo de procesamiento de formularios.
-
 
 ### 4. Subir Documentos desde PostgreSQL a Qdrant
 
