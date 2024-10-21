@@ -14,14 +14,39 @@ Develop an agent that merges client data with templates to generate the final le
 
 ### Agent Functionality
 
-  - [] Read file from  the localpath
-  - [] Read the client information file
-  - [] Use `re` library to find all the markers 
-  - [] Replace all the markers
-  - [] Create a new file
+  - [x] Read file from  the localpath
+  - [x] Read the client information file
+  - [x] Use `re` library to find all the markers 
+  - [x] Replace all the markers in a new file called 'schema'
+  - [x] Create a new file
 
-- Data Insertion: Use string replacement or templating libraries to insert data into placeholders.
+### LLM Entity Extraction
 
+  - [] Define system prompts to instruct the LLM
+
+     - [x] Define Clear data scheme with pydantic
+     - [x] Create a data extraction function
+     - [x] Create a Tool
+     - [x] Configure Azure on Langchain
+     - [x] Start agents with tools
+     - [x] Process the input file 
+     - [x] Generate the output file
+
+
+  - [] Use LLM responses to fill in the predefined categories 
+  - [] Validate the output
+
+### Data Insertion
+
+  - [x] Replace placeholders in the template using the extracted data 
+  - [] Ensure all placeholders are correctly replaced 
+  - [] Perform validation checks to confirm all fields are filled in.
+
+### Document Generation
+
+- [ ] Combine the template with the inserted client data to create a complete legal document.
+- [ ] Save the final document in the required format (e.g., `.pdf`, `.docx`).
+- [ ] Use a library like `pdfkit` or `WeasyPrint` for generating PDFs, if necessary.
 #### Example Libraries:
 - **Python**: `string.Template`, `Jinja2`
 
