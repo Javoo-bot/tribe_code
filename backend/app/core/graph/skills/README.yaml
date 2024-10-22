@@ -47,7 +47,7 @@ components:
         def execute(self, prompt: str) -> str:
             return self.agent.run(prompt)
   AgentOutputParser:
-    description: "Convierte el output en algo estructurado para saber si hay que continuar o finalizar."
+    description: "Convierte el output en algo estructurado para saber si hay que continuar o finalizar. Pydantic se puede usar como Pydantic parser"
     example_code: |
       class AgentOutputParser:
         def parse(self, llm_response: str) -> str:
