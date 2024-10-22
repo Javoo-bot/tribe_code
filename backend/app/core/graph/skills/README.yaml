@@ -1,0 +1,200 @@
+# Archivo de documentación funcional - LangChain y Azure OpenAI
+
+# ================================
+# Agente en LangChain
+# ================================
+
+agent_description:
+  description: "Información sobre la funcionalidad del agente en LangChain"
+  question: "¿Qué es un agente en LangChain?"
+  answer: |
+    Es una clase que usa un LLM para decidir la secuencia de pasos más práctica. 
+    El LLM usa un motor de razonamiento que le permite 'razonar' la información.
+
+# ================================
+# Ejemplos de Agentes
+# ================================
+
+example_agents:
+  simple_agent:
+    name: "BaseSingleActionAgent --> LLMSingleActionAgent"
+    code: |
+      class MyLLMSingleActionAgent(LLMSingleActionAgent):
+          def __init__(self, llm):
+              super().__init__(llm=llm)
+
+      ag_simple = MyLLMSingleActionAgent(llm=llm_instance)
+      respuesta = ag_simple.run("Explain gravity in simple terms.")
+      print(f"Respuesta agente simple: {respuesta}")
+
+# ================================
+# Componentes del Agente
+# ================================
+
+components:
+  AgentType:
+    description: "Define el tipo de agente. Reemplazado el uso de 'deprecated' por '.create_react_agent' o 'structured-chat-agent'."
+    example_code: |
+      class MockLLM:
+        def generate(self, prompt: str) -> str:
+            return f"LLM says: {prompt}"
+  AgentExecutor:
+    description: "Coordina las decisiones del agente hasta llegar a una respuesta final."
+    example_code: |
+      class AgentExecutor:
+        def __init__(self, agent):
+            self.agent = agent
+        def execute(self, prompt: str) -> str:
+            return self.agent.run(prompt)
+  AgentOutputParser:
+    description: "Convierte el output en algo estructurado para saber si hay que continuar o finalizar."
+    example_code: |
+      class AgentOutputParser:
+        def parse(self, llm_response: str) -> str:
+            return llm_response.replace("LLM says: ", "")
+  AgentAction:
+    description: "Define la acción que el LLM decidió ejecutar."
+    example_code: |
+      class AgentAction:
+        def __init__(self, action_name: str, parameters: dict):
+            self.action_name = action_name
+            self.parameters = parameters
+        def execute(self) -> str:
+            if self.action_name == "explain":
+                return f"Explanation for: {self.parameters.get('topic', 'unknown')}"
+            return "Unknown action"
+  AgentFinish:
+    description: "Contiene el resultado final del agente."
+    example_code: |
+      class AgentFinish:
+        def __init__(self, result: str):
+            self.result = result
+        def finalize(self) -> str:
+            return f"Final result: {self.result}"
+
+# ================================
+# Agente Completo
+# ================================
+
+complete_agent:
+  name: "MyLLMSingleActionAgent"
+  description: "Agente con todas las funcionalidades integradas."
+  code: |
+    class MyLLMSingleActionAgent(LLMSingleActionAgent):
+        def __init__(self, llm):
+            super().__init__(llm=llm)
+        
+        def run(self, prompt: str) -> str:
+            llm_response = self.llm.generate(prompt)
+            parsed_output = AgentOutputParser().parse(llm_response)
+            action = AgentAction("explain", {"topic": parsed_output})
+            action_response = action.execute()
+            finish = AgentFinish(action_response)
+            return finish.finalize()
+
+    llm_instance = MockLLM()
+    agent_simple = MyLLMSingleActionAgent(llm=llm_instance)  
+    respuesta = agent_simple.run("Explain gravity in simple terms.")
+    print(f"Respuesta agente simple: {respuesta}")
+
+# ================================
+# Ejemplo de AgentExecutor
+# ================================
+
+executor_example:
+  description: "Ejecución de un agente mediante AgentExecutor."
+  code: |
+    executor = AgentExecutor(agent_simple)
+    respuesta_ejecutada = executor.execute("Explain photosynthesis in simple terms.")
+    print(f"Respuesta ejecutada del agente: {respuesta_ejecutada}")
+
+# ================================
+# Modelos de Chat
+# ================================
+
+chat_models:
+  description: "Modelos de chat y su implementación en LangChain."
+  example_code: |
+    class ChatOpenAI(BaseChatModel):
+        def chat(self, conversation):
+            return "Respuesta generada por ChatOpenAI"
+
+  init_chat_model:
+    description: "Inicializa el modelo de chat."
+    code: |
+      from langchain.chat_models import init_chat_model
+      gpt_4o = init_chat_model("gpt-4o", model_provider="openai", temperature=0)
+      gpt_4o.invoke("what's your name")
+
+# ================================
+# Herramientas de LangChain
+# ================================
+
+langchain_tools:
+  description: "Herramientas que el agente usa para interactuar."
+  components:
+    CallbackManagerForToolRun:
+      description: "Permite monitorear la herramienta durante su ejecución."
+    AsyncCallbackManagerForToolRun:
+      description: "Permite la ejecución simultánea de herramientas."
+  example_code: |
+    class NameInput(BaseModel):
+        first_name: str = Field(description="El primer nombre de la persona")
+        last_name: str = Field(description="El apellido de la persona")
+
+    def create_welcome_message(input_data: NameInput) -> str:
+        welcome_message = f"Hola {input_data.first_name} {input_data.last_name}, bienvenido a LangChain!"
+        return welcome_message
+
+    welcome_tool = StructuredTool.from_function(
+        func=create_welcome_message,
+        name="WelcomeTool",
+        description="Genera un mensaje de bienvenida basado en el primer nombre y apellido proporcionados.",
+        args_schema=NameInput,
+        return_direct=True
+    )
+
+# ================================
+# Integración con Azure OpenAI
+# ================================
+
+azure_openai_integration:
+  description: "Parámetros necesarios para la integración con Azure OpenAI."
+  parameters:
+    - nombre_deployment
+    - temperatura_modelo
+    - api_version
+    - timeout
+    - max_intentos
+  example_code: |
+    from langchain_openai import AzureChatOpenAI
+
+    llm = AzureChatOpenAI(
+        azure_deployment="your-deployment",
+        api_version="2024-05-01-preview",
+        temperature=0,
+        max_tokens=None,
+        timeout=None,
+        max_retries=2
+    )
+
+    messages = [
+        ("system", "You are a helpful translator. Translate the user sentence to French."),
+        ("human", "I love programming."),
+    ]
+    llm.invoke(messages)
+
+# ================================
+# Prompt Engineering
+# ================================
+
+prompt_engineering:
+  description: "Optimización de prompts para mejorar la interacción con el modelo."
+  link: "https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/prompt-engineering?tabs=chat"
+
+# ================================
+# Pruebas Unitarias
+# ================================
+
+unit_tests:
+  description: "Pruebas unitarias recomendadas para LLMs."

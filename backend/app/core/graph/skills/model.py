@@ -111,7 +111,7 @@ llm = AzureChatOpenAI(
 # Crear el agente con la herramienta
 tools = [get_template_info_tool]
 
-# Inicializar el agente
+# Inicializar el agente (deprecated)
 agent = initialize_agent(
     tools,
     llm,
