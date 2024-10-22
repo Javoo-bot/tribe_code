@@ -4,13 +4,8 @@ FROM python:3.10-slim
 # Establecer el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia el archivo con el script en el contenedor
+# Copiar el resto del código fuente al contenedor
 COPY . .
-
-# Instalar dependencias de sistema que podrían ser necesarias
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
 
 # Instalar pip y las dependencias necesarias
 RUN pip install --no-cache-dir \
@@ -18,7 +13,6 @@ RUN pip install --no-cache-dir \
     langchain==0.0.208 \
     openai==0.27.4 \
     requests python-dotenv
-
 
 # Ejecutar el script cuando el contenedor se inicie
 CMD ["python", "model.py"]
