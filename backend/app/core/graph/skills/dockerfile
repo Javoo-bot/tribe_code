@@ -4,15 +4,23 @@ FROM python:3.10-slim
 # Establecer el directorio de trabajo en /app
 WORKDIR /app
 
+# Crear un entorno virtual en el directorio “.venv”
+RUN python -m venv .venv
+
+# Actualizar pip dentro del entorno virtual
+RUN .venv/bin/pip install --upgrade pip
+
 # Copiar el resto del código fuente al contenedor
 COPY . .
 
-# Instalar pip y las dependencias necesarias
-RUN pip install --no-cache-dir \
+# Instalar las dependencias necesarias en el entorno virtual
+RUN .venv/bin/pip install --no-cache-dir \
+    Jinja2==3.1.2 \
     pydantic==1.10.7 \
     langchain==0.0.208 \
     openai==0.27.4 \
-    requests python-dotenv
+    requests \
+    python-dotenv
 
-# Ejecutar el script cuando el contenedor se inicie
-CMD ["python", "model.py"]
+# Usar el Python del entorno virtual para ejecutar el script
+CMD [".venv/bin/python", "filling_model.py"]
