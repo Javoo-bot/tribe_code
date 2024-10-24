@@ -1,0 +1,13 @@
+FROM python:3.9-slim
+
+# Definir un directorio de trabajo adecuado
+WORKDIR /app
+
+# Copiar los archivos del proyecto
+COPY . /app
+
+# Instalar las dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Definir el comando de entrada del contenedor
+CMD ["python", "test_qdrant.py"]

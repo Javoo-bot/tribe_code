@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "text": "Ciberseguridad Global S.L.",
+        "metadata": {
+            "tipo": "nombre_empresa_cliente",
+            "cliente": "Apple",
+            "sector": "Tecnología"
+        }
+    },
+    {
+        "id": 2,
+        "text": "Calle Falsa 123, 28000 Madrid, España",
+        "metadata": {
+            "tipo": "direccion_cliente",
+            "cliente": "Apple",
+            "ciudad": "Madrid",
+            "pais": "España",
+            "tipo_direccion": "fiscal"
+        }
+    },
+    {
+        "id": 3,
+        "text": "Juan Pérez Gómez",
+        "metadata": {
+            "tipo": "representante_cliente",
+            "cliente": "Apple",
+            "rol": "principal",
+            "region": "España"
+        }
+    },
+    {
+        "id": 4,
+        "text": "Seguridad Digital Pro S.L.",
+        "metadata": {
+            "tipo": "nombre_empresa_ciberseguridad",
+            "cliente": "Apple",
+            "sector": "Seguridad"
+        }
+    },
+    {
+        "id": 5,
+        "text": "Avenida de la Innovación 45, 08000 Barcelona, España",
+        "metadata": {
+            "tipo": "direccion_empresa_ciberseguridad",
+            "cliente": "Apple",
+            "ciudad": "Barcelona",
+            "pais": "España",
+            "tipo_direccion": "operacional"
+        }
+    },
+    {
+        "id": 6,
+        "text": "Laura Martínez López",
+        "metadata": {
+            "tipo": "representante_ciberseguridad",
+            "cliente": "Apple",
+            "rol": "principal",
+            "region": "Cataluña"
+        }
+    },
+    {
+        "id": 7,
+        "text": "12 meses",
+        "metadata": {
+            "tipo": "duracion_contrato",
+            "cliente": "Apple",
+            "unidad_tiempo": "meses"
+        }
+    },
+    {
+        "id": 8,
+        "text": "25,000 euros",
+        "metadata": {
+            "tipo": "importe_contrato",
+            "cliente": "Apple",
+            "moneda": "EUR"
+        }
+    },
+    {
+        "id": 9,
+        "text": "mensualmente, al final de cada mes",
+        "metadata": {
+            "tipo": "calendario_pagos",
+            "cliente": "Apple",
+            "frecuencia": "mensual"
+        }
+    },
+    {
+        "id": 10,
+        "text": "30 días",
+        "metadata": {
+            "tipo": "preaviso_terminacion",
+            "cliente": "Apple",
+            "unidad_tiempo": "días"
+        }
+    },
+    {
+        "id": 11,
+        "text": "España",
+        "metadata": {
+            "tipo": "pais_jurisdiccion",
+            "cliente": "Apple"
+        }
+    },
+    {
+        "id": 12,
+        "text": "Madrid",
+        "metadata": {
+            "tipo": "lugar_firma",
+            "cliente": "Apple",
+            "pais": "España"
+        }
+    },
+    {
+        "id": 13,
+        "text": "1 de noviembre de 2024",
+        "metadata": {
+            "tipo": "fecha_firma",
+            "cliente": "Apple",
+            "formato": "DD/MM/YYYY"
+        }
+    },
+    {
+        "id": 14,
+        "text": "Juan Pérez Gómez",
+        "metadata": {
+            "tipo": "firma_representante_cliente",
+            "cliente": "Apple",
+            "rol": "representante"
+        }
+    },
+    {
+        "id": 15,
+        "text": "Laura Martínez López",
+        "metadata": {
+            "tipo": "firma_representante_ciberseguridad",
+            "cliente": "Apple",
+            "rol": "representante"
+        }
+    }
+]
