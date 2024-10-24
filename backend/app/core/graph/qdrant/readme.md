@@ -1,6 +1,6 @@
-# Qdrant Documentation
+# Basic Qdrant Documentation
 
-Este documento describe la configuración y el uso de Qdrant como base de datos vectorial en el proyecto. A continuación se detallan los distintos archivos y componentes donde aparece Qdrant y cómo se gestiona.
+Este documento describe la configuración y el uso basico Qdrant como base de datos vectorial en el proyecto. A continuación se detallan los distintos archivos y componentes donde aparece Qdrant y cómo se gestiona.
 
 ## Índice
 
